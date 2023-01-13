@@ -1,0 +1,334 @@
+/* *{
+    outline: 1px solid red;
+} */
+
+
+/* Add reservations */
+
+/* .plan-reserv-header{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-direction: row;
+    color: rgb(240, 174, 51);
+    color: orange;
+    font-weight: bold;
+} */
+
+.plan-reserv{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+}
+
+.plan-reserv div:nth-child(1) input{
+    margin: auto;
+    width: 155px;
+}
+
+.plan-reserv-sec:nth-child(2) input{
+    width: 80px;
+    margin: auto;
+}
+
+.plan-reserv-sec:nth-child(3) input{
+    margin: auto;
+    width: 80px;
+}
+
+.plan-reserv-sec{
+    flex: 1;
+    gap:1rem;
+    display: flex;
+    flex-direction: column;
+    color: orange;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+.plan-reserv-sec label{
+    margin: auto;
+}
+
+.plan-reserv-select{
+    margin-top: 3rem;
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-direction: row;
+    /* margin-left: 15%;
+    margin-right: 15%; */
+    /* color: orange; */
+    /* font-weight: bold; */
+}
+
+.plan-reserv-select-sec{
+    flex: 1;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: orange;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+.plan-reserv-select-sec label{
+    margin: auto;
+}
+
+.plan-reserv-btn{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.special-div{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    color: orange;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+.special-div-content{
+    flex: 1;
+    max-width: 300px;
+    margin: auto;
+}
+
+.special-div-content label{
+    padding-right: 0.5rem;
+}
+
+.plan-reserv-btn button{
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 6px;
+    background-color: orange;
+}
+
+/* Calendar top : header and weekday */
+
+.plan-main {
+    display: flex;
+    padding: 2rem 0;
+    justify-content: center;
+    background-color: #FFFCFF;
+}
+
+#container {
+    padding: 0 8%;
+    width: 100%;
+}
+
+.plan-main button {
+    margin-right: 2.5px;
+    margin-left: 2.5px;
+    width: 75px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px gray;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.plan-header {
+    padding-left: 10px;
+    color: #d36c6c;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+
+.monthDisplay{
+    font-size: 1.25rem;
+}
+
+.plan-header button {
+    background-color: #92a1d1;
+}
+
+#weekdays {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 0.5rem;
+    color: #247BA0;
+}
+
+#weekdays div {
+    flex: 1;
+    /* padding: 10px; */
+    display: flex;
+    justify-content: center;
+    
+}
+
+/* Calendar */
+
+#calendar {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    width: 14.28%;
+    padding: 10px;
+    height: 160px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0px 0px 3px #CBD4C2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* justify-content: space-between; */
+}
+
+.day:hover {
+    background-color: #e8faed;
+}
+
+.day+.currentDay {
+    background-color: #e8f4fa;
+}
+
+/* Event section in calendar */
+
+.event {
+    font-size: 12px;
+    padding: 4px;
+    background-color: #58bae4;
+    color: white;
+    border-radius: 5px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.event-other-reserv {
+    font-size: 12px;
+    padding: 4px;
+    background-color: #cd58e4;
+    color: white;
+    border-radius: 5px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.calendar-event-list {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    background-color: #58bae4;
+    color: white;
+    border-radius: 8px;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.padding {
+    cursor: default !important;
+    background-color: #FFFCFF !important;
+    box-shadow: none !important;
+}
+
+.calendar-info{
+    z-index: 20;
+    padding: 2rem;
+    background-color: #e8f4fa;
+    box-shadow: 0px 0px 3px black;
+    border-radius: 5px;
+    width: 400px;
+    top: 100px;
+    left: calc(50% - 200px);
+    position: fixed;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-list-info{
+    z-index: 9;
+    padding: 2rem;
+    background-color: #e8f4fa;
+    box-shadow: 0px 0px 3px black;
+    border-radius: 5px;
+    width: 400px;
+    top: 100px;
+    left: calc(50% - 200px);
+    position: fixed;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-info h2{
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-info h2{
+    text-align: center;
+}
+
+.calendar-info span>span{
+    font-weight: bold;
+    color: rgb(152, 59, 215);
+}
+
+.calendar-info-btn{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+#cancelButton,
+#deleteButton {
+    background-color: rgb(240, 174, 51);
+    justify-content: center;
+}
+
+#saveButton,
+#closeButton {
+    background-color: #92a1d1;
+}
+
+#eventText {
+    font-size: 14px;
+}
+
+#modalBackDrop {
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100vw;
+    /* height: 100vh; */
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.calendar-list-back-drop{
+    top: 0px;
+    left: 0px;
+    z-index: 8;
+    width: 100vw;
+    /* height: 100vh; */
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+}

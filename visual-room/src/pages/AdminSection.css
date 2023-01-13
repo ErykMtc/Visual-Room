@@ -1,0 +1,209 @@
+.admin-btn{
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 6px;
+    background-color: orange;
+    margin-bottom: 2.5rem;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+/* User */
+
+.admin-user-list{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.admin-user-list li{
+    font-size: 1.5rem;
+    flex-basis: 49%;
+    list-style: none;
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.308);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 2px solid orange;
+}
+
+.admin-user-list li>div{
+    font-size: 1.5rem;
+}
+
+.admin-user-name{
+    flex: 2;
+}
+
+.admin-user-role{
+    flex: 2;
+}
+
+.admin-user-numeration{
+    flex:1;
+}
+
+.admin-user-delete{
+    flex: 1;
+    margin-left: 1.5rem;
+    text-align: right;
+}
+
+.admin-user-delete span{
+    cursor: pointer;
+}
+
+/* Room */
+
+.admin-room-add{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.admin-room-add input{
+    font-size: 1.25rem;
+    flex: 2;
+}
+
+.admin-room-add select{
+    flex: 1;
+}
+
+.admin-room-add-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.admin-room-list{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+.admin-room-list li{
+    font-size: 1.5rem;
+    flex-basis: 49%;
+    gap: 1rem;
+    list-style: none;
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.308);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 2px solid orange;
+}
+
+.admin-room-list li>div{
+    font-size: 1.5rem;
+}
+
+.admin-room-name{
+    flex: 2;
+}
+
+.admin-room-role{
+    flex: 2;
+}
+
+.admin-room-numeration{
+    flex:1;
+}
+
+.admin-room-delete{
+    flex: 1;
+    margin-left: 1.5rem;
+    text-align: right;
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+    
+}
+
+.admin-room-delete span{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Student Group */
+
+.admin-student-add{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.admin-student-add input{
+    font-size: 1.25rem;
+    flex: 2;
+}
+
+.admin-student-add select{
+    flex: 1;
+}
+
+.admin-student-add-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.admin-student-list{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 2rem;
+}
+
+.admin-student-list li{
+    font-size: 1.5rem;
+    gap: 1rem;
+    flex-basis: 49%;
+    list-style: none;
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.308);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 2px solid orange;
+}
+
+.admin-student-list li>div{
+    font-size: 1.5rem;
+}
+
+.admin-student-name{
+    flex: 2;
+}
+
+.admin-student-role{
+    flex: 2;
+}
+
+.admin-student-numeration{
+    flex:1;
+}
+
+.admin-student-delete{
+    flex: 1;
+    margin-left: 1.5rem;
+    text-align: right;
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.admin-student-delete span{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
