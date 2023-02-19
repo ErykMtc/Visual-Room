@@ -10,6 +10,8 @@ import DeleteEventModal from "../calendar/EventList";
 import useDate from "../calendar/hooks/useDate";
 import './Plan.css';
 import moment from "moment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
@@ -57,7 +59,7 @@ export default function Plan() {
     // moment(temp2).isAfter(moment(temp))
 
     if (!moment(temp2).isAfter(moment(temp))) {
-      alert('Złe wartości daty');
+      toast.error("Niepoprawna data!");
       return;
     }
 
@@ -101,13 +103,13 @@ export default function Plan() {
 
     if (reservType === '0') {
       axiosPrivate.post('/reservation', reservation, {
-      }).then((response) => { alert('Wprowadzono'); }).catch(function (error) {
-        alert('Rezerwacja niemożliwa');
+      }).then((response) => { toast.success("Wprowadzono!"); }).catch(function (error) {
+        toast.error("Rezerwacja niemożliwa!");
       });
     } else {
       var endTemp = mainDateEnd + "T" + endDate;
       if (!moment(endTemp).isAfter(moment(temp))) {
-        alert('Złe wartości datyyy');
+        toast.error("Złe wartości daty!");
         return;
       }
 
@@ -142,7 +144,9 @@ export default function Plan() {
         }
       }
 
-      var respons = axiosPrivate.post('/reservation/create', reservation, {}).then((response) => {alert('Wprowadzono');});
+      var respons = axiosPrivate.post('/reservation/create', reservation, {}).then((response) => {toast.success("Wprowadzono!");}).catch(function (error) {
+        toast.error("Rezerwacja niemożliwa!");
+      });
 
     }
 
@@ -194,16 +198,37 @@ export default function Plan() {
     });
   }, []);
 
-  console.log(auth.roles.find(role => role == "2001"))
+  // console.log(auth.roles.find(role => role == "2001"))
+
+
+  // const refresh = async (e) => {
+  //   const getRes = async () => {
+  //     try {
+  //         const response = await axiosPrivate.get("/reservation", {
+  //         }).then((res)=> {
+  //           setEvents(res.data);
+  //         });
+  //     } catch (err) {
+  //         console.error(err);
+  //     }
+  // }
+
+  // getRes();  
+  // setEvents(events.slice()); 
+  // }
+
+
 
   const { days, dateDisplay } = useDate(isAllReserv, nav);
 
   if (!events || !allEvents || !stud || !room || !isAllReserv) return <div class="loader"></div>;
 
+
   return (
     <>
       <Container>
         {auth.roles.find(role => (role == "9999" || role == "2000" || role == "2002")) ? <>
+        <ToastContainer />
         <h2 class="decorated"><span>Dodaj Rezerwacje</span></h2>
         <Row>
           <Col>

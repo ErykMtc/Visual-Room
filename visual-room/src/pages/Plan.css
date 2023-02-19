@@ -299,7 +299,11 @@
 #cancelButton,
 #deleteButton {
     background-color: rgb(240, 174, 51);
+    border-radius: 0.5rem;
     justify-content: center;
+    /* border: none; */
+    margin-left: 0.25rem;
+    /* padding: 0.5rem; */
 }
 
 #saveButton,

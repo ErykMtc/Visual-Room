@@ -6,6 +6,10 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import UpdateRoom from "../component/UpdateRoom";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Room = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -52,21 +56,62 @@ const Room = () => {
             }, {
                 signal: controller.signal,
             })
-            .then((response) => { alert('Dodano') }).catch(function (error) {
-                alert('Zmiana niemożliwa, podaj inne dane');
+            .then((response) => { 
+                toast.success("Dodano"); 
+                refresh()
+                setInputName("");
+                setInputNumb("");
+            }).catch(function (error) {
+                toast.error("Zmiana niemożliwa, podaj inne dane!");
             });
     };
 
     const deleteRoom = async (selRoom) => {
         const roomid = selRoom._id;
+        var tempost = room.filter(item => item._id != roomid);
 
         const res = axiosPrivate.delete('/room', {
             data: { "id": roomid },
         }).then((response) => {
-            //odswierzanie strony
+            setRoom(tempost);
         });
 
     }
+
+
+    const confirmDelete = async (delid) => {
+        await confirmAlert({
+          title: 'Ostrzeżenie',
+          message: 'Czy napewno chcesz usunąć?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {deleteRoom(delid)}
+            },
+            {
+              label: 'No',
+              onClick: () => {return;}
+            }
+          ]
+        });
+      }
+
+      const refresh = async (e) => {
+        const getRes = async () => {
+          try {
+              const response = await axiosPrivate.get("/room", {
+              }).then((res)=> {
+                setRoom(res.data)
+              });
+              
+          } catch (err) {
+              console.error(err);
+          }
+      }
+    
+      getRes();
+      setRoom(room.slice());
+      }
 
 
     return (
@@ -74,6 +119,7 @@ const Room = () => {
             <Container>
                 <Row>
                     <Col>
+                    <ToastContainer />
                         <h3>Dodaj sale</h3>
                         <div className="admin-room-add">
                             <input
@@ -124,7 +170,7 @@ const Room = () => {
                                                 <FontAwesomeIcon icon={faPenNib} size='1x' />
                                             </span>
                                             <span onClick={(e) => {
-                                                deleteRoom(room);
+                                                confirmDelete(room);
                                             }}>
                                                 <FontAwesomeIcon icon={faTrash} size='1x' />
                                             </span>
@@ -151,6 +197,7 @@ const Room = () => {
             onClose={() => {
             setClicked(null);
             setUpdadeData(null);
+            refresh();
             }}
             room={updateData}
         />

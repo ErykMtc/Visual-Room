@@ -18,7 +18,7 @@ const UpdateRoom = ({ room, onClose }) => {
         "capacity": capacity
     }
   
-    const res = axiosPrivate.put('/room' , rese , {
+    const res = await axiosPrivate.put('/room' , rese , {
     }).then((response) => {
     }).catch(function (error) {
       alert('Zmiana niemożliwa');

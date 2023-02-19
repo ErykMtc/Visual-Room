@@ -13,7 +13,8 @@ const useDate = (events, nav) => {
     if (events !== null)
       for (let i = 0; i < events.length; i++) {
         // do arr dodac inne dane z pokoju takie jak data i dodac w formacie json
-        if(moment(events[i].datestart).format('YYYY-MM-DD') === date){
+        if(events[i].room === null) console.log(events[i])
+        if(moment(events[i].datestart).format('YYYY-MM-DD') === date && events[i].room !== null){
           arr.push({event: events[i].room.name, dates: moment(events[i].datestart).format("HH:mm"), datee: moment(events[i].dateend).format("HH:mm"), id: events[i]._id, idres: events[i].userreserv });
 
         }

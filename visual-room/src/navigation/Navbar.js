@@ -35,11 +35,10 @@ export default function Navbar() {
         <ul className="menu">
           <CustomLink to="/">Strona Główna</CustomLink>
           <CustomLink to="/plan">Rezerwuj</CustomLink>
-          <CustomLink to="/history">Historia</CustomLink>
-          <CustomLink to="/admin">Zarządzaj</CustomLink>
+          {auth.roles && auth.roles.find(role => (role == "9999" || role == "2002" || role == "2000")) ? <CustomLink to="/history">Historia</CustomLink>  : <></>}
+          {auth.roles && auth.roles.find(role => (role == "9999" || role == "2002")) ? <CustomLink to="/admin">Zarządzaj</CustomLink> : <></>}
           {/* <CustomLink to="#" onClick={() => setVisible(!visible)}>Wyszukaj <FontAwesomeIcon icon={faSearch} /></CustomLink> */}
 
-          {/* Zrobić wyszukiwarke podobną do tej na stronie Cisco */}
         </ul>
         <div className="login-section">
           {auth.userid ? <Link to="/login" onClick={signOut} className="login-btn">Wyloguj się</Link> : <Link to="/login" className="login-btn">Zaloguj się</Link>}

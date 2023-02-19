@@ -21,7 +21,7 @@ const UpdateStudent = ({ student, onClose }) => {
         "amount": amount
     }
   
-    const res = axiosPrivate.put('/student' , rese , {
+    const res = await axiosPrivate.put('/student' , rese , {
     }).then((response) => {
     }).catch(function (error) {
       alert('Zmiana niemożliwa');

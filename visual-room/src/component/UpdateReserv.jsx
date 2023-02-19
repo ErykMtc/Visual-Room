@@ -5,6 +5,7 @@ import moment from "moment";
 const UpdateReserv = ({ reservation, onClose }) => {
   const [reserv, setReserv] = useState("");
   const [error, setError] = useState(false);
+  // const [isLoading, setLoading] = useState(false);
 
   const [mainDate, setMainDate] = useState(moment(reservation.datestart).format('YYYY-MM-DD'));
   const [startDate, setStartDate] = useState(moment(reservation.datestart).format('HH:mm'));
@@ -28,10 +29,9 @@ const UpdateReserv = ({ reservation, onClose }) => {
     }
   
     const controller = new AbortController();
-    const res = axiosPrivate.put('/reservation' , rese , {
+    const res = await axiosPrivate.put('/reservation' , rese , {
       signal: controller.signal
     }).then((response) => {
-        // mozna dodac pobieranie danych zeby odswierzyc
     }).catch(function (error) {
       alert('Rezerwacja niemożliwa');
     });
@@ -39,6 +39,7 @@ const UpdateReserv = ({ reservation, onClose }) => {
 
   return (
     <>
+    
       <div className="calendar-info">
         <h2>Rezerwacja sali {reservation.room.name}</h2>
 
@@ -88,9 +89,11 @@ const UpdateReserv = ({ reservation, onClose }) => {
 
         <span className="calendar-info-btn">
           <button onClick={onClose} id="cancelButton">
-            Cancel
-          </button>
-          <button onClick={(e) => updateClick().then(onClose)} id="cancelButton">
+          Cancel
+        </button>
+
+          
+          <button onClick={(e) => {updateClick().then(onClose)}} id="cancelButton">
             Aktualizuj
           </button>
         </span>

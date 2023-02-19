@@ -24,14 +24,14 @@ const AdminReservation = () => {
   
   
     const deleteClick = async (delid) => {
-      console.log(delid)
+      var tempost = events.filter(item => item._id != delid)
       const controller = new AbortController();
       const res = axiosPrivate.delete('/reservation', {
         data: { "id": delid },
         signal: controller.signal
       }).then((response) => {
         console.log("usunieto");
-        window.location.reload(false);
+        setEvents(tempost);
       });
   
     }
@@ -46,6 +46,22 @@ const AdminReservation = () => {
         console.log(response.data)
       });
     }, []);
+
+    const refresh = async (e) => {
+      const getRes = async () => {
+        try {
+            const response = await axiosPrivate.get("/reservation", {
+            }).then((res)=> {
+              setEvents(res.data);
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+  
+    getRes();  
+    setEvents(events.slice()); 
+    }
 
     if (!events) return <div class="loader"></div>;
     return (
@@ -100,6 +116,7 @@ const AdminReservation = () => {
           onClose={() => {
             setClicked(null);
             setUpdadeData(null);
+            refresh();
           }}
           reservation={updateData}
         />

@@ -3,6 +3,8 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 const Users = () => {
@@ -39,16 +41,34 @@ const Users = () => {
 
     const deleteUser = async (selUser) => {
         const userid = selUser._id;
+        var tempost = users.filter(item => item._id != userid);
 
         const controller = new AbortController();
         const res = axiosPrivate.delete('/users' , {
             data: {"id": userid },
             signal: controller.signal
           }).then((response) => {
-            //odswierzanie strony
+            setUsers(tempost);
           });
         
     }
+
+    const confirmDelete = async (delid) => {
+        await confirmAlert({
+          title: 'Ostrzeżenie',
+          message: 'Czy napewno chcesz usunąć?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {deleteUser(delid)}
+            },
+            {
+              label: 'No',
+              onClick: () => {return;}
+            }
+          ]
+        });
+      }
 
     const userChange = async (e, selectUser) => {
         const temp = e.target.value;
@@ -114,7 +134,7 @@ const Users = () => {
                             </select>
                             <div className="admin-user-delete">
                                 <span onClick={(e) => {
-                                    deleteUser(user);
+                                    confirmDelete(user);
                                 }}>
                                     <FontAwesomeIcon icon={faTrash} size='1x' />
                                 </span>

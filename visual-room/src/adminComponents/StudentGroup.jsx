@@ -6,6 +6,11 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenNib } from '@fortawesome/free-solid-svg-icons';
 import UpdateStudent from "../component/UpdateStudent";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const StrudentGroup = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -52,27 +57,68 @@ const StrudentGroup = () => {
             }, {
                 signal: controller.signal,
             })
-            .then((response) => { alert('Dodano'); }).catch(function (error) {
-                alert('Zmiana niemożliwa, podaj inne dane');
+            .then((response) => { 
+                toast.success("Dodano"); 
+                setInputName("");
+                setInputNumb("");
+                refresh();
+            }).catch(function (error) {
+                toast.error("Zmiana niemożliwa, podaj inne dane!");
               });
     };
 
     const deleteStudent = async (selRoom) => {
         const roomid = selRoom._id;
+        var tempost = student.filter(item => item._id != roomid);
 
         const res = axiosPrivate.delete('/student' , {
             data: {"id": roomid },
           }).then((response) => {
-            //odswierzanie strony
+            setStudent(tempost);
           });
         
     }
+
+    const confirmDelete = async (delid) => {
+        await confirmAlert({
+          title: 'Ostrzeżenie',
+          message: 'Czy napewno chcesz usunąć?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {deleteStudent(delid)}
+            },
+            {
+              label: 'No',
+              onClick: () => {return;}
+            }
+          ]
+        });
+      }
+
+      const refresh = async (e) => {
+        const getRes = async () => {
+          try {
+              const response = await axiosPrivate.get("/student", {
+              }).then((res)=> {
+                setStudent(res.data)
+              });
+              
+          } catch (err) {
+              console.error(err);
+          }
+      }
+    
+      getRes();
+      setStudent(student.slice());
+      }
 
     return (
         <div>
             <Container>
                 <Row>
                     <Col>
+                    <ToastContainer />
                         <h3>Dodaj grupe studentów</h3>
                         <div className="admin-student-add">
                             <input
@@ -123,7 +169,7 @@ const StrudentGroup = () => {
                                                 <FontAwesomeIcon icon={faPenNib} size='1x' />
                                             </span>
                                             <span onClick={(e) => {
-                                                deleteStudent(student);
+                                                confirmDelete(student);
                                             }}>
                                                 <FontAwesomeIcon icon={faTrash} size='1x'/>
                                             </span>
@@ -150,6 +196,7 @@ const StrudentGroup = () => {
             onClose={() => {
             setClicked(null);
             setUpdadeData(null);
+            refresh();
             }}
             student={updateData}
         />

@@ -1,8 +1,10 @@
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useRef, useState, useEffect, useContext, useCallback } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import UpdateReserv from '../component/UpdateReserv';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import './History.css';
 
@@ -26,7 +28,8 @@ export default function History() {
   const [updateData, setUpdadeData] = useState('');
   var [norFilterEvents, setNotFilterEvents] = useState('');
 
-  function deleteRes(idres){
+  async function deleteRes(idres){
+
     // console.log("tutaj")
     var tempost = events;
     var tempost2 = norFilterEvents;
@@ -38,6 +41,8 @@ export default function History() {
 }
 
   const deleteClick = async (delid) => {
+    
+
     console.log(delid)
     const controller = new AbortController();
     const res = axiosPrivate.delete('/reservation', {
@@ -48,6 +53,23 @@ export default function History() {
       deleteRes(delid);
     });
 
+  }
+
+  const confirmDelete = async (delid) => {
+    await confirmAlert({
+      title: 'Ostrzeżenie',
+      message: 'Czy napewno chcesz usunąć?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {deleteClick(delid)}
+        },
+        {
+          label: 'No',
+          onClick: () => {return;}
+        }
+      ]
+    });
   }
 
 
@@ -68,6 +90,34 @@ export default function History() {
   }, [events]);
 
   
+  const refresh = async (e) => {
+    const userid = auth.userid;
+    const getRes = async () => {
+      try {
+          const response = await axiosPrivate.get("/reservation/user/" + userid, {
+          }).then((res)=> {
+            setEvents(res.data);
+            setNotFilterEvents(res.data);
+            
+            
+          });
+          // console.log(response.data);
+          // setEvents(response.data);
+          // setNotFilterEvents(response.data);
+          
+      } catch (err) {
+          console.error(err);
+      }
+
+
+  }
+
+  getRes();
+
+  setEvents(events.slice());
+  
+  }
+
 
   if (!events || !norFilterEvents) return <div class="loader"></div>;
 
@@ -152,7 +202,7 @@ export default function History() {
                           setClicked(true);
                           setUpdadeData(iteam);
                         }} className='reserv-update'><FontAwesomeIcon icon={faPenNib} size='2x' /></span>
-                        <span onClick={(e) => deleteClick(iteam._id)} className='reserv-delete'><FontAwesomeIcon icon={faTrash} size='2x' /></span>
+                        <span onClick={(e) => confirmDelete(iteam._id)} className='reserv-delete'><FontAwesomeIcon icon={faTrash} size='2x' /></span>
                       </div>
                     </div>
                     <div className='history-reserv-footer'>
@@ -180,6 +230,9 @@ export default function History() {
           onClose={() => {
             setClicked(null);
             setUpdadeData(null);
+            // setEvents(null);
+            refresh();
+
           }}
           reservation={updateData}
         />
