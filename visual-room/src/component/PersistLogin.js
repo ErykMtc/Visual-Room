@@ -12,7 +12,6 @@ const PersistLogin = () => {
         const verifyRefreshToken = async () => {
             try {
                 await refresh();
-                // console.log("jestem w refresh");
             }
             catch (err) {
                 console.error(err);
@@ -22,14 +21,8 @@ const PersistLogin = () => {
             }
         }
 
-        // Avoids unwanted call to verifyRefreshToken
         !auth?.accessToken ? verifyRefreshToken() : setIsLoading(false);
     }, [])
-
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
-    }, [isLoading])
 
     return (
         <>

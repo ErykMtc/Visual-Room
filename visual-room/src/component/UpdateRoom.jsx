@@ -63,16 +63,6 @@ const UpdateRoom = ({ room, onClose }) => {
           ></input>
         </span>
 
-        {/* <button 
-          onClick={() => {
-            if (title) {
-              setError(false);
-              onSave(title);
-            } else {
-              setError(true);
-            }
-          }} 
-          id="saveButton">Save</button> */}
 
         <span className="calendar-info-btn">
           <button onClick={onClose} id="cancelButton">

@@ -23,7 +23,6 @@ const Users = () => {
                 const response = await axiosPrivate.get('/users', {
                     signal: controller.signal
                 });
-                // console.log(response.data);
                 isMounted && setUsers(response.data);
             } catch (err) {
                 console.error(err);
@@ -84,19 +83,14 @@ const Users = () => {
                 [temp]: numb
             }
         }
-
-        // console.log(roles);
       
         const controller = new AbortController();
         const res = axiosPrivate.put('/users/update' , roles , {
           signal: controller.signal
         }).then((response) => {
-            // mozna dodac pobieranie danych zeby odswierzyc
         });
     
       }
-
-    //   console.log("user", users[1].roles.User)
 
     return (
         <article>

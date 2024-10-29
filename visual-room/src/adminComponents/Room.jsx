@@ -31,7 +31,6 @@ const Room = () => {
                 const response = await axiosPrivate.get('/room', {
                     signal: controller.signal
                 });
-                console.log(response.data);
                 isMounted && setRoom(response.data);
             } catch (err) {
                 console.error(err);

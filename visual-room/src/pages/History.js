@@ -30,26 +30,20 @@ export default function History() {
 
   async function deleteRes(idres){
 
-    // console.log("tutaj")
     var tempost = events;
     var tempost2 = norFilterEvents;
     tempost = events.filter(item => item._id != idres);
-    // console.log(tempost)
     tempost2 = norFilterEvents.filter(item => item._id != idres);
     setEvents(tempost);
     setNotFilterEvents(tempost2);
 }
 
   const deleteClick = async (delid) => {
-    
-
-    console.log(delid)
     const controller = new AbortController();
     const res = axiosPrivate.delete('/reservation', {
       data: { "id": delid },
       signal: controller.signal
     }).then((response) => {
-      console.log("usunieto");
       deleteRes(delid);
     });
 
@@ -81,7 +75,6 @@ export default function History() {
     }).then((response) => {
       setEvents(response.data);
       setNotFilterEvents(response.data);
-      // console.log(response.data)
     });
   }, []);
 
@@ -101,9 +94,6 @@ export default function History() {
             
             
           });
-          // console.log(response.data);
-          // setEvents(response.data);
-          // setNotFilterEvents(response.data);
           
       } catch (err) {
           console.error(err);
@@ -129,17 +119,6 @@ export default function History() {
       setEvents(norFilterEvents.filter((item) => item.room.name.startsWith(filter)));
     }
   }
-
-
-  //   if(!filter){
-  //     setFilter("Wszystkie");
-  // }
-
-  // if (filter != "Wszystkie" && post.length > 0){
-  //     var filtered = events.filter((item) => item.name.startsWith(filter))
-  // }else{
-  //     var filtered = events;
-  // }
 
   return (
     <>
@@ -173,7 +152,7 @@ export default function History() {
                       onChange={(e) => setFilter(e.target.value)} value={filter || ''}
                       required />
                     <span className="input-icon" onClick={(e) => sortByName()}><FontAwesomeIcon icon={faSearch} size='2xl' /></span>
-                    {/* <button className="input-icon" ><FontAwesomeIcon icon={faSearch} size='2xl' /></button> */}
+
                   </form>
                 </div>
                 </div>
@@ -230,7 +209,6 @@ export default function History() {
           onClose={() => {
             setClicked(null);
             setUpdadeData(null);
-            // setEvents(null);
             refresh();
 
           }}

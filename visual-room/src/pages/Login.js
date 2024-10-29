@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { useRef, useState, useEffect, useContext } from 'react';
-// import AuthContext from "../context/AuthProvider";
 import axios from '../api/axios';
 
 
@@ -37,8 +36,6 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log({ login: user, password: pwd });
         try {
             const response = await axios.post('/auth',
             JSON.stringify({ user, pwd }),
@@ -48,25 +45,15 @@ export default function Login() {
                 }
             );
 
-            console.log(response?.data);
 
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             const userid = response?.data?.userid;
 
-
-            console.log(response.data);
-            console.log(userid);
-            // console.log(pwd);
             setAuth({ user, pwd, roles, accessToken, userid });
 
             setUser('');
             setPwd('');
-            // console.log(response.data.id);
-            // Cookies.set('usrFilmoteka', JSON.stringify({user:user, pwd:pwd, id:response.data.id, role:response.data.role}))
-
-            //throw to another page
-            // window.location.href = '/';
             navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {

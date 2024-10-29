@@ -25,11 +25,6 @@ export default function Plan() {
 
   const [nav, setNav] = useState(0);
   const [displayEvents, SetDisplayEvents] = useState(null);
-  // const [events, setEvents] = useState(
-  //   localStorage.getItem('events') ?
-  //     JSON.parse(localStorage.getItem('events')) :
-  //     []
-  // );
 
   const [events, setEvents] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
@@ -47,35 +42,17 @@ export default function Plan() {
   const [selectUser, setSelectUser] = useState('');
 
 
-  // console.log("rooooom", endDate);
-
 
   const reservClick = async (e) => {
 
     var temp = mainDate + "T" + startDate;
     var temp2 = mainDate + "T" + endDate;
 
-    // temp.localeCompare(temp2)
-    // moment(temp2).isAfter(moment(temp))
-
     if (!moment(temp2).isAfter(moment(temp))) {
       toast.error("Niepoprawna data!");
       return;
     }
 
-    // console.log("gggg room",changeRoom._id,"gggg stud", changeStudent)
-
-    // if(changeRoom.length !== 2 && changeStudent.length !== 2){
-    //   alert('Coś poszło nie tak');
-    //   return;
-    // }
-
-    // if(changeRoom[1] < changeStudent[1]){
-    //   alert('Sala jest za mała na pomieszczenie tej grupy');
-    //   return;
-    // }
-
-    // console.log(moment(temp2).isAfter(moment(temp)));
     var reservation = {
       "datestart": temp,
       "dateend": temp2,
@@ -95,12 +72,6 @@ export default function Plan() {
       }
     }
 
-
-
-
-    console.log(reservation);
-    console.log("jestem");
-
     if (reservType === '0') {
       axiosPrivate.post('/reservation', reservation, {
       }).then((response) => { toast.success("Wprowadzono!"); }).catch(function (error) {
@@ -119,7 +90,6 @@ export default function Plan() {
         type = 14;
         weeks = Math.floor((moment(endTemp).diff(temp, 'week')) / 2) + 1;
       }
-      console.log(weeks)
 
       reservation = {
         "datestart": temp,
@@ -197,25 +167,6 @@ export default function Plan() {
       setStud(response.data);
     });
   }, []);
-
-  // console.log(auth.roles.find(role => role == "2001"))
-
-
-  // const refresh = async (e) => {
-  //   const getRes = async () => {
-  //     try {
-  //         const response = await axiosPrivate.get("/reservation", {
-  //         }).then((res)=> {
-  //           setEvents(res.data);
-  //         });
-  //     } catch (err) {
-  //         console.error(err);
-  //     }
-  // }
-
-  // getRes();  
-  // setEvents(events.slice()); 
-  // }
 
 
 
@@ -351,9 +302,7 @@ export default function Plan() {
                 key={index}
                 day={d}
                 onClick={() => {
-                  // if (d.value !== 'padding') {
-                  //   setClicked(d.date);
-                  // }
+
                 }}
               />
             ))}

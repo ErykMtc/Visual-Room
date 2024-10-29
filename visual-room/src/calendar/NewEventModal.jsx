@@ -10,15 +10,11 @@ const NewEventModal = ({ reservation, onClose }) => {
 
   useEffect(() => {
     const controller = new AbortController();
-    console.log(reservation);
     const res = axiosPrivate.get('/reservation/' + reservation, {
       signal: controller.signal
     }).then((response) => {
-      // console.log(response.data);
       setReserv(response.data);
       });
-      // console.log(res.data);
-    // console.log("aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbb")
   }, []);
 
   if(!reserv) return null;
@@ -31,17 +27,6 @@ const NewEventModal = ({ reservation, onClose }) => {
         <span><span>Data końcowa:</span> {moment(reserv.dateend).format('YYYY-MM-DD HH:mm')}</span>
         <span><span>Grupa studentów:</span> {reserv.studentgroup.name} , rok: {reserv.studentgroup.year}</span>
         <span><span>Ilość studentów:</span> {reserv.studentgroup.amount}</span>
-
-        {/* <button 
-          onClick={() => {
-            if (title) {
-              setError(false);
-              onSave(title);
-            } else {
-              setError(true);
-            }
-          }} 
-          id="saveButton">Save</button> */}
 
         <span className='calendar-info-btn'>
         <button 

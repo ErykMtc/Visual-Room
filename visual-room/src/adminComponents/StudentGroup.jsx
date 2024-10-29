@@ -32,7 +32,6 @@ const StrudentGroup = () => {
                 const response = await axiosPrivate.get('/student', {
                     signal: controller.signal
                 });
-                // console.log(response.data);
                 isMounted && setStudent(response.data);
             } catch (err) {
                 console.error(err);

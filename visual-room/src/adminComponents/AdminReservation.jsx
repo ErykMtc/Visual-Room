@@ -30,7 +30,6 @@ const AdminReservation = () => {
         data: { "id": delid },
         signal: controller.signal
       }).then((response) => {
-        console.log("usunieto");
         setEvents(tempost);
       });
   
@@ -43,7 +42,6 @@ const AdminReservation = () => {
         signal: controller.signal
       }).then((response) => {
         setEvents(response.data);
-        console.log(response.data)
       });
     }, []);
 

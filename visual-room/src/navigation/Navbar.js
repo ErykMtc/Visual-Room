@@ -20,8 +20,6 @@ export default function Navbar() {
         navigate('/login');
     }
 
-    // console.log("aaaa", auth)
-
   return (
       <div className="navbar">
         <div className="site-title">
@@ -37,7 +35,7 @@ export default function Navbar() {
           <CustomLink to="/plan">Rezerwuj</CustomLink>
           {auth.roles && auth.roles.find(role => (role == "9999" || role == "2002" || role == "2000")) ? <CustomLink to="/history">Historia</CustomLink>  : <></>}
           {auth.roles && auth.roles.find(role => (role == "9999" || role == "2002")) ? <CustomLink to="/admin">Zarządzaj</CustomLink> : <></>}
-          {/* <CustomLink to="#" onClick={() => setVisible(!visible)}>Wyszukaj <FontAwesomeIcon icon={faSearch} /></CustomLink> */}
+
 
         </ul>
         <div className="login-section">

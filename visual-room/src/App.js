@@ -26,8 +26,6 @@ const ROLES = {
 function App() {
   return (
     <>
-      {/* <Router> */}
-      {/* <AdminNav /> */}
       <Navbar />
       <Routes>
         <Route element={<PersistLogin />}>
@@ -51,7 +49,6 @@ function App() {
 
       </Routes>
       <Footer />
-      {/* </Router> */}
     </>
   );
 }

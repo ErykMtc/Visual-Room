@@ -80,8 +80,6 @@ const Register = () => {
     // check validation of password
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
         setValidPwd(result);
         setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd]);
@@ -114,15 +112,9 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
 
             // to chnge layout after registration
             setSuccess(true);
-
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
             setUser('');
             setPwd('');
             setMatchPwd('');
@@ -163,8 +155,6 @@ const Register = () => {
                                     </p>
                                     <div className="login-section">
                                         <label htmlFor="login">Login</label>
-                                        {/* <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                                <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /> */}
                                         <input
                                             className="input"
                                             type="text"
